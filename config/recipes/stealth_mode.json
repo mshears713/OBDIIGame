@@ -1,0 +1,78 @@
+{
+  "_comment": "Stealth Mode Recipe - Utility signal for avoiding detection",
+  "_educational_note": "Represents reducing electromagnetic emissions and signal noise to avoid detection by other ECU modules, similar to running silent protocols.",
+
+  "recipe_id": "stealth_mode",
+  "name": "Silent Running Protocol",
+  "description": "Minimizes signal emissions and noise, making you harder to detect by enemy systems. Useful for avoiding combat or sneaking past threats.",
+
+  "category": "utility",
+
+  "inputs": [
+    {
+      "_comment": "Stealth mode base signal",
+      "signal_type": "stealth_mode",
+      "quantity": 1,
+      "consumed": false
+    },
+    {
+      "_comment": "Bridge signals to reroute communications",
+      "signal_type": "bridge_signal",
+      "quantity": 2,
+      "consumed": true
+    },
+    {
+      "_comment": "Sensor readings to calibrate noise reduction",
+      "signal_type": "sensor_reading",
+      "quantity": 2,
+      "consumed": true
+    }
+  ],
+
+  "outputs": [
+    {
+      "_comment": "Produces a stealth status signal",
+      "signal_type": "stealth_active",
+      "quantity": 1,
+      "properties": {
+        "duration": 20,
+        "power": 75,
+        "_note": "75% detection reduction for 20 turns"
+      }
+    }
+  ],
+
+  "requirements": {
+    "min_floor": 2,
+    "special_item": null,
+    "skill_check": 50
+  },
+
+  "effects": {
+    "on_craft": [
+      {
+        "effect_type": "apply_status",
+        "target": "self",
+        "status": "stealthed",
+        "duration": 20,
+        "parameters": {
+          "detection_reduction": 0.75,
+          "movement_bonus": 0
+        }
+      },
+      {
+        "effect_type": "message",
+        "text": "Silent running protocols engaged. You fade from enemy sensors.",
+        "color": "gray"
+      }
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "discoverable": true,
+    "hint": "Rerouting signals through bridge connections can reduce your electromagnetic signature...",
+    "tags": ["utility", "stealth", "detection", "avoidance"],
+    "version": "1.0"
+  }
+}

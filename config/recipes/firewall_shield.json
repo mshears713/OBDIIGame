@@ -1,0 +1,77 @@
+{
+  "_comment": "Firewall Shield Recipe - Defensive barrier signal",
+  "_educational_note": "Represents creating a firewall rule in the ECU communication system to block malicious packets, similar to automotive cybersecurity measures.",
+
+  "recipe_id": "firewall_shield",
+  "name": "Firewall Protection Routine",
+  "description": "Configures temporary firewall rules to block corrupted data packets, reducing incoming damage from enemy attacks.",
+
+  "category": "defensive",
+
+  "inputs": [
+    {
+      "_comment": "Base firewall rule template",
+      "signal_type": "firewall_rule",
+      "quantity": 1,
+      "consumed": false
+    },
+    {
+      "_comment": "Sensor readings to calibrate the filter",
+      "signal_type": "sensor_reading",
+      "quantity": 3,
+      "consumed": true
+    },
+    {
+      "_comment": "Error correction to stabilize the shield",
+      "signal_type": "error_correction",
+      "quantity": 2,
+      "consumed": true
+    }
+  ],
+
+  "outputs": [
+    {
+      "_comment": "Produces a protective shield signal",
+      "signal_type": "shield_active",
+      "quantity": 1,
+      "properties": {
+        "duration": 15,
+        "power": 50,
+        "_note": "50% damage reduction for 15 turns"
+      }
+    }
+  ],
+
+  "requirements": {
+    "min_floor": 2,
+    "special_item": null,
+    "skill_check": 40
+  },
+
+  "effects": {
+    "on_craft": [
+      {
+        "effect_type": "apply_status",
+        "target": "self",
+        "status": "shielded",
+        "duration": 15,
+        "parameters": {
+          "damage_reduction": 0.5
+        }
+      },
+      {
+        "effect_type": "message",
+        "text": "Firewall activated! Defensive protocols engaged.",
+        "color": "blue"
+      }
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "discoverable": true,
+    "hint": "Firewall rules can be calibrated with sensor data to create protective barriers...",
+    "tags": ["defensive", "protection", "status_effect", "intermediate"],
+    "version": "1.0"
+  }
+}

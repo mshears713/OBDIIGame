@@ -16,6 +16,7 @@ Educational Note:
 from src.systems.renderer import Renderer
 from src.systems.movement import MovementSystem
 from src.systems.input_handler import InputHandler, Action, Command
+from src.systems.crafting import CraftingSystem, Recipe, get_crafting_system, reset_crafting_system
 
 __all__ = [
     'Renderer',
@@ -23,4 +24,8 @@ __all__ = [
     'InputHandler',
     'Action',
     'Command',
+    'CraftingSystem',
+    'Recipe',
+    'get_crafting_system',
+    'reset_crafting_system',
 ]

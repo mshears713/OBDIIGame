@@ -1,0 +1,89 @@
+{
+  "_comment": "System Reboot Recipe - Cleanse negative status effects",
+  "_educational_note": "Simulates a soft reset of ECU systems to clear error codes and restore normal operation, a common diagnostic procedure.",
+
+  "recipe_id": "system_reboot",
+  "name": "Emergency System Reboot",
+  "description": "Initiates a controlled system restart to clear all negative status effects and restore normal operation. Risky but effective.",
+
+  "category": "utility",
+
+  "inputs": [
+    {
+      "_comment": "Backup signal to save state before reboot",
+      "signal_type": "backup_signal",
+      "quantity": 1,
+      "consumed": true
+    },
+    {
+      "_comment": "Error correction to ensure clean restart",
+      "signal_type": "error_correction",
+      "quantity": 3,
+      "consumed": true
+    },
+    {
+      "_comment": "ECU query to verify system state",
+      "signal_type": "ecu_query",
+      "quantity": 2,
+      "consumed": true
+    }
+  ],
+
+  "outputs": [
+    {
+      "_comment": "Produces a reboot command signal",
+      "signal_type": "reboot_complete",
+      "quantity": 1,
+      "properties": {
+        "duration": 0,
+        "power": 100,
+        "_note": "Instant effect, clears all negative statuses"
+      }
+    }
+  ],
+
+  "requirements": {
+    "min_floor": 2,
+    "special_item": null,
+    "skill_check": 60
+  },
+
+  "effects": {
+    "on_craft": [
+      {
+        "effect_type": "clear_status",
+        "target": "self",
+        "status_types": ["negative"],
+        "_note": "Removes all debuffs but also removes buffs"
+      },
+      {
+        "effect_type": "heal",
+        "target": "self",
+        "value": 10,
+        "_note": "Small heal as systems stabilize"
+      },
+      {
+        "effect_type": "apply_status",
+        "target": "self",
+        "status": "rebooting",
+        "duration": 3,
+        "parameters": {
+          "_note": "Vulnerable during reboot - can't act for 1 turn"
+        }
+      },
+      {
+        "effect_type": "message",
+        "text": "System reboot initiated... All status effects cleared!",
+        "color": "yellow"
+      }
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "discoverable": true,
+    "hint": "Creating a backup before rebooting allows safe system restoration...",
+    "tags": ["utility", "cleanse", "reset", "status_management"],
+    "version": "1.0"
+  }
+}
