@@ -1,0 +1,383 @@
+{
+  "_comment": "Floor 0: Tutorial Level - Teaches basic game mechanics",
+  "_educational_note": "This floor is designed to onboard new players with step-by-step guidance",
+  "_design_goals": [
+    "Introduce movement and exploration",
+    "Teach combat basics",
+    "Explain inventory and items",
+    "Demonstrate signal crafting",
+    "Prepare player for Floor 1"
+  ],
+
+  "floor_id": 0,
+  "name": "ECU Training Environment",
+  "description": "A safe simulation environment designed to teach new processes about the ECU system. Here you'll learn movement, combat, item usage, and signal crafting before entering the real CAN Bus.",
+  "theme": "tutorial",
+
+  "dimensions": {
+    "_comment": "Smaller map for focused tutorial experience",
+    "width": 25,
+    "height": 15
+  },
+
+  "generation": {
+    "_comment": "Simple layout with clear rooms for each tutorial section",
+    "algorithm": "tutorial_special",
+    "_note": "Tutorial uses custom generation with predefined room layout",
+    "room_count_min": 4,
+    "room_count_max": 4,
+    "room_size_min": 5,
+    "room_size_max": 7,
+    "corridor_width": 1
+  },
+
+  "tutorial_sections": {
+    "_comment": "Tutorial is divided into learning sections",
+    "sections": [
+      {
+        "section_id": "movement",
+        "room_index": 0,
+        "title": "Movement & Exploration",
+        "messages": [
+          {
+            "trigger": "on_enter",
+            "text": "Welcome to the ECU Training Environment!",
+            "color": "cyan",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enter",
+            "text": "Use arrow keys or WASD to move around. Try exploring this room.",
+            "color": "white",
+            "delay": 1
+          },
+          {
+            "trigger": "on_item_collect",
+            "text": "Good! You picked up an item. Press 'i' to view your inventory.",
+            "color": "green",
+            "delay": 0
+          }
+        ],
+        "objectives": [
+          "Move around the room",
+          "Pick up the Signal Boost item",
+          "Find the door to the next room"
+        ]
+      },
+      {
+        "section_id": "combat",
+        "room_index": 1,
+        "title": "Combat Basics",
+        "messages": [
+          {
+            "trigger": "on_enter",
+            "text": "This room contains a Training Dummy - a harmless entity for practice.",
+            "color": "cyan",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enter",
+            "text": "Move adjacent to an enemy and press Enter or Space to attack.",
+            "color": "white",
+            "delay": 1
+          },
+          {
+            "trigger": "on_first_attack",
+            "text": "Great! Your attack dealt damage. Keep attacking to defeat the dummy.",
+            "color": "green",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enemy_defeat",
+            "text": "Victory! You've defeated the training dummy and gained experience.",
+            "color": "green",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enemy_defeat",
+            "text": "Enemies drop signals when defeated - useful for crafting!",
+            "color": "yellow",
+            "delay": 1
+          }
+        ],
+        "objectives": [
+          "Approach the Training Dummy",
+          "Attack by moving into it",
+          "Defeat the Training Dummy"
+        ]
+      },
+      {
+        "section_id": "items",
+        "room_index": 2,
+        "title": "Items & Healing",
+        "messages": [
+          {
+            "trigger": "on_enter",
+            "text": "This room teaches you about consumable items.",
+            "color": "cyan",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enter",
+            "text": "Pick up the Signal Boost, then press 'i' to open inventory.",
+            "color": "white",
+            "delay": 1
+          },
+          {
+            "trigger": "on_inventory_open",
+            "text": "Select the Signal Boost and press 'u' to use it. This will restore HP.",
+            "color": "white",
+            "delay": 0
+          },
+          {
+            "trigger": "on_item_use",
+            "text": "Excellent! Items can heal, buff, or provide other benefits.",
+            "color": "green",
+            "delay": 0
+          },
+          {
+            "trigger": "on_item_use",
+            "text": "Always keep healing items in your inventory for emergencies!",
+            "color": "yellow",
+            "delay": 1
+          }
+        ],
+        "objectives": [
+          "Pick up Signal Boost items",
+          "Open inventory (press 'i')",
+          "Use a Signal Boost to heal"
+        ]
+      },
+      {
+        "section_id": "crafting",
+        "room_index": 3,
+        "title": "Signal Crafting",
+        "messages": [
+          {
+            "trigger": "on_enter",
+            "text": "Final lesson: Signal Crafting! Combine signals to create powerful effects.",
+            "color": "cyan",
+            "delay": 0
+          },
+          {
+            "trigger": "on_enter",
+            "text": "You should have sensor signals from defeating enemies. Press 'c' to craft.",
+            "color": "white",
+            "delay": 1
+          },
+          {
+            "trigger": "on_craft_menu_open",
+            "text": "Select 'Error Correction Routine' - it requires 2 sensor readings.",
+            "color": "white",
+            "delay": 0
+          },
+          {
+            "trigger": "on_craft_success",
+            "text": "Success! Crafting consumed your signals and healed you.",
+            "color": "green",
+            "delay": 0
+          },
+          {
+            "trigger": "on_craft_success",
+            "text": "Experiment with different signal combinations to discover recipes!",
+            "color": "yellow",
+            "delay": 1
+          },
+          {
+            "trigger": "on_stairs_found",
+            "text": "You've completed the tutorial! Take the stairs down to begin your journey.",
+            "color": "cyan",
+            "delay": 0
+          }
+        ],
+        "objectives": [
+          "Open crafting menu (press 'c')",
+          "Craft Error Correction Routine",
+          "Find the stairs to Floor 1"
+        ]
+      }
+    ]
+  },
+
+  "tile_distribution": {
+    "_comment": "Minimal hazards in tutorial",
+    "hazard_tiles": 0.0,
+    "door_tiles": 0.05
+  },
+
+  "enemy_spawns": [
+    {
+      "_comment": "Training Dummy - Takes damage but never attacks",
+      "enemy_type": "training_dummy",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 100,
+      "placement": "room_1"
+    },
+    {
+      "_comment": "Very weak enemy for combat practice",
+      "enemy_type": "weak_glitch",
+      "count_min": 1,
+      "count_max": 1,
+      "spawn_weight": 100,
+      "placement": "room_2"
+    }
+  ],
+
+  "item_spawns": [
+    {
+      "_comment": "Starting healing item in movement room",
+      "item_type": "signal_boost",
+      "count_min": 1,
+      "count_max": 1,
+      "spawn_weight": 100,
+      "placement": "room_0"
+    },
+    {
+      "_comment": "More healing items in items room",
+      "item_type": "signal_boost",
+      "count_min": 3,
+      "count_max": 3,
+      "spawn_weight": 100,
+      "placement": "room_2"
+    },
+    {
+      "_comment": "Sensor signals for crafting tutorial",
+      "item_type": "sensor_reading_signal",
+      "count_min": 3,
+      "count_max": 3,
+      "spawn_weight": 100,
+      "placement": "room_3"
+    },
+    {
+      "_comment": "Error correction signal for recipe",
+      "item_type": "error_correction_signal",
+      "count_min": 1,
+      "count_max": 1,
+      "spawn_weight": 100,
+      "placement": "room_3"
+    }
+  ],
+
+  "special_features": {
+    "_comment": "Tutorial-specific features",
+    "features": [
+      {
+        "feature_type": "info_panel",
+        "room_index": 0,
+        "text": "╔══════════════════════════════╗\n║   ECU TRAINING ENVIRONMENT   ║\n║                              ║\n║  LESSON 1: MOVEMENT          ║\n║  Use WASD or Arrow Keys      ║\n║  to navigate the dungeon     ║\n╚══════════════════════════════╝",
+        "position": "center"
+      },
+      {
+        "feature_type": "info_panel",
+        "room_index": 1,
+        "text": "╔══════════════════════════════╗\n║   COMBAT TRAINING            ║\n║                              ║\n║  Move into enemies to attack ║\n║  Watch your HP in status bar ║\n║  Defeated foes drop signals  ║\n╚══════════════════════════════╝",
+        "position": "center"
+      },
+      {
+        "feature_type": "info_panel",
+        "room_index": 2,
+        "text": "╔══════════════════════════════╗\n║   INVENTORY & ITEMS          ║\n║                              ║\n║  [i] Open Inventory          ║\n║  [u] Use Selected Item       ║\n║  [d] Drop Selected Item      ║\n╚══════════════════════════════╝",
+        "position": "center"
+      },
+      {
+        "feature_type": "info_panel",
+        "room_index": 3,
+        "text": "╔══════════════════════════════╗\n║   SIGNAL CRAFTING            ║\n║                              ║\n║  [c] Open Crafting Menu      ║\n║  Combine signals for effects ║\n║  Discover new recipes!       ║\n╚══════════════════════════════╝",
+        "position": "center"
+      }
+    ]
+  },
+
+  "stairs": {
+    "_comment": "Only stairs down - tutorial is one-way",
+    "stairs_down": {
+      "enabled": true,
+      "placement": "room_3_center",
+      "_note": "Stairs in final room after crafting lesson"
+    },
+    "stairs_up": {
+      "enabled": false
+    }
+  },
+
+  "difficulty": {
+    "_comment": "Very easy difficulty for learning",
+    "level": 0,
+    "enemy_health_multiplier": 0.5,
+    "enemy_damage_multiplier": 0.3,
+    "player_start_hp_bonus": 50,
+    "_note": "Player starts with bonus HP for safety"
+  },
+
+  "tips": {
+    "_comment": "Random tips displayed during tutorial",
+    "general_tips": [
+      "Tip: Press 'h' anytime to view the help menu with all commands.",
+      "Tip: Your HP regenerates slowly outside of combat. Rest to heal!",
+      "Tip: Different enemies have different behaviors - observe their patterns.",
+      "Tip: Save your game frequently with 's' to preserve progress.",
+      "Tip: Some signals are consumed when crafting, others are reusable.",
+      "Tip: Explore thoroughly - hidden items and secrets await!",
+      "Tip: Status effects can buff or debuff you. Check the status bar.",
+      "Tip: Ranged enemies attack from distance. Close the gap quickly!",
+      "Tip: Items in your inventory have weight. Don't carry too much!",
+      "Tip: Read item descriptions carefully to understand their effects."
+    ],
+    "combat_tips": [
+      "Combat Tip: Higher ground provides +1 defense bonus.",
+      "Combat Tip: Critical hits deal double damage! Build crit chance.",
+      "Combat Tip: Defense reduces incoming damage. Stack defense for survivability.",
+      "Combat Tip: Accuracy affects hit chance. Low accuracy = more misses.",
+      "Combat Tip: Some enemies are weak to certain signal types."
+    ],
+    "crafting_tips": [
+      "Crafting Tip: Experiment with signal combinations to discover recipes.",
+      "Crafting Tip: Some recipes require special items or minimum floor level.",
+      "Crafting Tip: Reusable signals (marked *) aren't consumed when crafting.",
+      "Crafting Tip: Offensive recipes can damage multiple enemies at once.",
+      "Crafting Tip: Defensive recipes provide buffs and protection."
+    ]
+  },
+
+  "progression": {
+    "_comment": "Tutorial completion tracking",
+    "objectives_required": [
+      "complete_movement_section",
+      "complete_combat_section",
+      "complete_items_section",
+      "complete_crafting_section"
+    ],
+    "rewards": {
+      "on_completion": [
+        {
+          "reward_type": "item",
+          "item_id": "starter_pack",
+          "quantity": 1,
+          "_description": "Package with useful starting items"
+        },
+        {
+          "reward_type": "message",
+          "text": "Tutorial Complete! You've earned a Starter Pack for Floor 1.",
+          "color": "gold"
+        }
+      ]
+    }
+  },
+
+  "metadata": {
+    "_comment": "Tutorial floor metadata",
+    "author": "Tutorial Designer",
+    "version": "1.0",
+    "tags": ["tutorial", "beginner", "educational", "safe"],
+    "estimated_duration": "5-10 minutes",
+    "skip_available": true,
+    "_design_philosophy": "Gradual introduction of mechanics with immediate feedback and safe practice environment",
+    "accessibility": {
+      "difficulty_override": false,
+      "god_mode_available": true,
+      "hints_enabled": true,
+      "auto_tutorial": true
+    }
+  }
+}

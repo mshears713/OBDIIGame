@@ -1,0 +1,76 @@
+{
+  "_comment": "Starter Pack - Reward for completing tutorial",
+  "_educational_note": "Contains useful items for beginning Floor 1",
+
+  "item_id": "starter_pack",
+  "name": "ECU Starter Pack",
+  "description": "A collection of essential tools for new processes entering the ECU system. Contains healing items, signals, and a basic weapon upgrade. Open to receive contents.",
+
+  "visual": {
+    "ascii_char": "?",
+    "color": "gold",
+    "render_order": 1
+  },
+
+  "properties": {
+    "item_type": "container",
+    "stackable": false,
+    "max_stack": 1,
+    "usable": true,
+    "_note": "Opens to reveal multiple items"
+  },
+
+  "contains": {
+    "_comment": "Items received when pack is opened",
+    "items": [
+      {
+        "item_id": "signal_boost",
+        "quantity": 3,
+        "description": "Healing potions for emergencies"
+      },
+      {
+        "item_id": "sensor_reading_signal",
+        "quantity": 5,
+        "description": "Crafting materials"
+      },
+      {
+        "item_id": "error_correction_signal",
+        "quantity": 2,
+        "description": "Reusable crafting component"
+      },
+      {
+        "item_id": "basic_firewall",
+        "quantity": 1,
+        "description": "+2 defense equipment"
+      }
+    ]
+  },
+
+  "effects": {
+    "_comment": "What happens when pack is opened",
+    "on_use": [
+      {
+        "effect_type": "unpack",
+        "target": "inventory",
+        "_note": "Adds all contained items to player inventory"
+      },
+      {
+        "effect_type": "message",
+        "text": "You open the Starter Pack and receive useful items!",
+        "color": "gold"
+      },
+      {
+        "effect_type": "message",
+        "text": "Received: 3x Signal Boost, 5x Sensor Signals, 2x Error Correction, 1x Basic Firewall",
+        "color": "green"
+      }
+    ]
+  },
+
+  "metadata": {
+    "rarity": "special",
+    "value": 100,
+    "tags": ["tutorial", "reward", "container", "starter"],
+    "_note": "Cannot be purchased - only obtained from tutorial completion"
+  }
+}

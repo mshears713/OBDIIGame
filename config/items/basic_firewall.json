@@ -1,0 +1,67 @@
+{
+  "_comment": "Basic Firewall - Starter defensive equipment",
+  "_educational_note": "First equipment piece - teaches equipment system",
+
+  "item_id": "basic_firewall",
+  "name": "Basic Firewall",
+  "description": "A simple defensive protocol that reduces incoming damage. Provides +2 defense when equipped. Every process needs basic protection.",
+
+  "visual": {
+    "ascii_char": "[",
+    "color": "blue",
+    "render_order": 1
+  },
+
+  "properties": {
+    "item_type": "equipment",
+    "stackable": false,
+    "max_stack": 1,
+    "usable": false,
+    "equipment_slot": "defense",
+    "equippable": true
+  },
+
+  "stat_modifiers": {
+    "_comment": "Bonuses when equipped",
+    "defense": 2,
+    "max_hp": 5,
+    "_note": "Small but meaningful defense boost for beginners"
+  },
+
+  "requirements": {
+    "_comment": "Requirements to equip",
+    "min_level": 1,
+    "min_floor": 0,
+    "_note": "No restrictions - starter equipment"
+  },
+
+  "effects": {
+    "_comment": "Special effects when equipped",
+    "on_equip": [
+      {
+        "effect_type": "message",
+        "text": "Basic Firewall equipped. Defense increased!",
+        "color": "blue"
+      }
+    ],
+    "on_unequip": [
+      {
+        "effect_type": "message",
+        "text": "Basic Firewall removed.",
+        "color": "gray"
+      }
+    ]
+  },
+
+  "metadata": {
+    "rarity": "common",
+    "value": 25,
+    "tags": ["equipment", "defense", "starter", "beginner"],
+    "upgrade_path": [
+      "advanced_firewall",
+      "firewall_suite",
+      "enterprise_firewall"
+    ],
+    "_note": "Intended as first equipment piece from tutorial"
+  }
+}

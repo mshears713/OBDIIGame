@@ -1,0 +1,19 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                         INVENTORY                             ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  [1] {ITEM_1_ICON} {ITEM_1_NAME} x{ITEM_1_QTY}               ║
+║  [2] {ITEM_2_ICON} {ITEM_2_NAME} x{ITEM_2_QTY}               ║
+║  [3] {ITEM_3_ICON} {ITEM_3_NAME} x{ITEM_3_QTY}               ║
+║  [4] {ITEM_4_ICON} {ITEM_4_NAME} x{ITEM_4_QTY}               ║
+║  [5] {ITEM_5_ICON} {ITEM_5_NAME} x{ITEM_5_QTY}               ║
+║  [6] {ITEM_6_ICON} {ITEM_6_NAME} x{ITEM_6_QTY}               ║
+║  [7] {ITEM_7_ICON} {ITEM_7_NAME} x{ITEM_7_QTY}               ║
+║  [8] {ITEM_8_ICON} {ITEM_8_NAME} x{ITEM_8_QTY}               ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║ Capacity: {USED}/{MAX}     Weight: {WEIGHT}                   ║
+║ Gold: {GOLD}g                                                 ║
+╠═══════════════════════════════════════════════════════════════╣
+║ [U]se  [D]rop  [E]quip  [I]nspect  [ESC] Close                ║
+╚═══════════════════════════════════════════════════════════════╝

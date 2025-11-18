@@ -1,0 +1,41 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           SIGNAL CRAFTING                                    ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  AVAILABLE RECIPES:                                                          ║
+║                                                                              ║
+║  [1] Error Correction Routine          [DEFENSIVE]                          ║
+║      Requires: 2x Sensor Reading, 1x Error Correction*                      ║
+║      Effect: Restore 15 HP                                                   ║
+║      Status: {CRAFTABLE}                                                     ║
+║                                                                              ║
+║  [2] Exploit Injection                 [OFFENSIVE]                          ║
+║      Requires: 3x Corrupted Data, 1x Malware Signature                       ║
+║      Effect: Deal 25 damage to enemies in 3-tile radius                      ║
+║      Status: {LOCKED - Floor 3+}                                             ║
+║                                                                              ║
+║  [3] Firewall Shield                   [DEFENSIVE]                          ║
+║      Requires: 2x Firewall Data, 1x Encryption Key                           ║
+║      Effect: +30% damage reduction for 5 turns                               ║
+║      Status: {CRAFTABLE}                                                     ║
+║                                                                              ║
+║  [4] System Reboot                     [UTILITY]                            ║
+║      Requires: 4x Sensor Reading, 2x System Data                             ║
+║      Effect: Remove all debuffs, restore 10 HP                               ║
+║      Status: {MISSING MATERIALS}                                             ║
+║                                                                              ║
+║  [5] Stealth Mode                      [UTILITY]                            ║
+║      Requires: 3x Ghost Signal, 1x Cloaking Algorithm*                       ║
+║      Effect: Become invisible for 3 turns                                    ║
+║      Status: {NOT DISCOVERED}                                                ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  YOUR SIGNALS:                                                               ║
+║    Sensor Reading: {QTY}        Corrupted Data: {QTY}                       ║
+║    Error Correction: {QTY}*     Firewall Data: {QTY}                        ║
+║    Encryption Key: {QTY}        System Data: {QTY}                          ║
+║                                                                              ║
+║  * = Reusable (not consumed when crafting)                                   ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  [1-9] Select Recipe  [ENTER] Craft  [?] Recipe Details  [ESC] Close        ║
+╚══════════════════════════════════════════════════════════════════════════════╝

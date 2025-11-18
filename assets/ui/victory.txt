@@ -1,0 +1,31 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║    ██╗   ██╗██╗ ██████╗████████╗ ██████╗ ██████╗ ██╗   ██╗██╗              ║
+║    ██║   ██║██║██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝██║              ║
+║    ██║   ██║██║██║        ██║   ██║   ██║██████╔╝ ╚████╔╝ ██║              ║
+║    ╚██╗ ██╔╝██║██║        ██║   ██║   ██║██╔══██╗  ╚██╔╝  ╚═╝              ║
+║     ╚████╔╝ ██║╚██████╗   ██║   ╚██████╔╝██║  ██║   ██║   ██╗              ║
+║      ╚═══╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝              ║
+║                                                                              ║
+║                    ECU System Integrity Fully Restored!                      ║
+║                                                                              ║
+║              You have successfully debugged the Engine Control Unit          ║
+║                  and eliminated all corrupted processes.                     ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║   Completion Stats:                                                          ║
+║   Total Floors Cleared: {FLOORS}                                             ║
+║   Enemies Defeated: {KILLS}                                                  ║
+║   Signals Crafted: {CRAFTS}                                                  ║
+║   Items Collected: {ITEMS}                                                   ║
+║   Time Elapsed: {TIME}                                                       ║
+║   Final Score: {SCORE}                                                       ║
+║                                                                              ║
+║   Rank: {RANK}                                                               ║
+║                                                                              ║
+║   [C] Continue Exploring                                                     ║
+║   [M] Return to Main Menu                                                    ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝

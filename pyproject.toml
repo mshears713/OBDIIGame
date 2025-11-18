@@ -1,0 +1,125 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecu-rogue"
+version = "1.0.0"
+description = "A modular Python roguelike game exploring automotive ECU systems"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["roguelike", "game", "education", "ecu", "automotive", "procedural-generation", "entity-component-system"]
+authors = [
+  {name = "Game Development Team", email = "your.email@example.com"}
+]
+maintainers = [
+  {name = "Game Development Team", email = "your.email@example.com"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Education",
+  "Intended Audience :: Developers",
+  "Topic :: Games/Entertainment :: Role-Playing",
+  "Topic :: Education",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "pytest>=7.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4.0",
+  "pytest-cov>=4.1.0",
+  "mypy>=1.5.0",
+  "black>=23.0.0",
+  "flake8>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/OBDIIGame"
+Documentation = "https://github.com/yourusername/OBDIIGame/tree/main/docs"
+Repository = "https://github.com/yourusername/OBDIIGame"
+"Bug Tracker" = "https://github.com/yourusername/OBDIIGame/issues"
+
+[project.scripts]
+ecu-rogue = "main:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+packages = ["src"]
+
+[tool.setuptools.package-data]
+"*" = [
+  "config/**/*.json",
+  "assets/**/*.txt",
+  "assets/**/*.md",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests",
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_equality = true
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

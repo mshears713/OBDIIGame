@@ -1,0 +1,55 @@
+{
+  "_comment": "Error Correction Signal - Reusable crafting component",
+  "_educational_note": "Not consumed in crafting - can be used repeatedly",
+
+  "item_id": "error_correction_signal",
+  "name": "Error Correction Algorithm",
+  "description": "A reusable error correction algorithm stored as a signal. Can be applied to sensor data to create healing effects. *This signal is not consumed when crafting.*",
+
+  "visual": {
+    "ascii_char": "*",
+    "color": "green",
+    "render_order": 1
+  },
+
+  "properties": {
+    "item_type": "signal",
+    "stackable": true,
+    "max_stack": 10,
+    "usable": false,
+    "reusable": true,
+    "_note": "NOT consumed when crafting - very valuable!"
+  },
+
+  "signals": {
+    "_comment": "Signal type and properties",
+    "signal_type": "algorithm",
+    "strength": 1.0,
+    "purity": 1.0,
+    "frequency": "high",
+    "reusable": true
+  },
+
+  "crafting_uses": {
+    "_comment": "Recipes that use this signal",
+    "used_in": [
+      "basic_heal",
+      "advanced_heal",
+      "system_recovery",
+      "data_restoration"
+    ]
+  },
+
+  "metadata": {
+    "rarity": "uncommon",
+    "value": 50,
+    "tags": ["signal", "crafting", "reusable", "algorithm", "valuable"],
+    "drop_sources": [
+      "Tutorial reward",
+      "Elite enemies",
+      "Floor chests",
+      "Rare drops from bosses"
+    ],
+    "_note": "Reusable nature makes this very valuable - don't sell!"
+  }
+}

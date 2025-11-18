@@ -1,0 +1,75 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              HELP & CONTROLS                                 ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  MOVEMENT:                                                                   ║
+║    Arrow Keys or WASD  - Move your character                                ║
+║    Numpad 1-9          - Move in 8 directions (diagonal movement)           ║
+║    5 or .              - Wait/Skip turn                                      ║
+║                                                                              ║
+║  ACTIONS:                                                                    ║
+║    Space or Enter      - Attack adjacent enemy / Interact                    ║
+║    i                   - Open/Close Inventory                                ║
+║    c                   - Open Crafting Menu                                  ║
+║    u                   - Use selected item                                   ║
+║    d                   - Drop selected item                                  ║
+║    e                   - Equip/Unequip item                                  ║
+║    g                   - Pick up item from ground                            ║
+║    >                   - Go down stairs                                      ║
+║    <                   - Go up stairs                                        ║
+║                                                                              ║
+║  GAME:                                                                       ║
+║    s                   - Save game                                           ║
+║    l                   - Load game                                           ║
+║    h or ?              - Show this help screen                               ║
+║    Esc                 - Close menus / Pause                                 ║
+║    q                   - Quit (with confirmation)                            ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                              GAME MECHANICS                                  ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  COMBAT:                                                                     ║
+║    - Move into enemies to attack them                                        ║
+║    - Each attack has a chance to hit based on accuracy                       ║
+║    - Critical hits deal double damage                                        ║
+║    - Defense reduces incoming damage                                         ║
+║    - Defeat enemies to gain XP and signal drops                              ║
+║                                                                              ║
+║  SIGNAL CRAFTING:                                                            ║
+║    - Collect signals from defeated enemies                                   ║
+║    - Open crafting menu (C) to view recipes                                  ║
+║    - Combine signals to create powerful effects                              ║
+║    - Some signals are consumed, others are reusable (marked with *)          ║
+║    - Experiment to discover new recipes!                                     ║
+║                                                                              ║
+║  ITEMS:                                                                      ║
+║    - Consumables: Use once for immediate effect (healing, buffs)             ║
+║    - Equipment: Equip for permanent stat bonuses                             ║
+║    - Signals: Used in crafting recipes                                       ║
+║    - Quest Items: Required for special objectives                            ║
+║                                                                              ║
+║  STATUS EFFECTS:                                                             ║
+║    - Buffs increase your stats temporarily                                   ║
+║    - Debuffs reduce your stats or deal damage over time                      ║
+║    - Check status panel to see active effects                                ║
+║    - Effects tick down each turn                                             ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  SYMBOLS:                                                                    ║
+║    @  - You (the player)                                                     ║
+║    p  - Corrupted Packet (enemy)                                             ║
+║    g  - Signal Glitch (enemy)                                                ║
+║    !  - Item (potion, consumable)                                            ║
+║    *  - Signal (crafting material)                                           ║
+║    [  - Equipment (armor, weapon)                                            ║
+║    >  - Stairs down                                                          ║
+║    <  - Stairs up                                                            ║
+║    #  - Wall                                                                 ║
+║    .  - Floor                                                                ║
+║    +  - Door                                                                 ║
+║                                                                              ║
+║  Press any key to close this help screen...                                  ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
