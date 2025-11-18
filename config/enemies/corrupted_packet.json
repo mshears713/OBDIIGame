@@ -36,6 +36,11 @@
   "metadata": {
     "difficulty_tier": 1,
     "xp_reward": 5,
-    "tags": ["weak", "common", "can_bus"]
+    "hp_scaling": 1.15,
+    "tags": ["weak", "common", "can_bus"],
+    "signal_drops": [
+      {"signal_type": "corrupted_packet", "quantity": 1},
+      {"signal_type": "sensor_reading", "quantity": 1}
+    ]
   }
 }

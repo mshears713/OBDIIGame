@@ -33,6 +33,11 @@
     ]
   },
 
+  "signals": {
+    "_comment": "Signals contained in this item",
+    "error_correction": 1
+  },
+
   "metadata": {
     "rarity": "common",
     "value": 10,
