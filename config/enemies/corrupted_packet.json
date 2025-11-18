@@ -1,0 +1,41 @@
+{
+  "_comment": "Corrupted Data Packet - Basic enemy for early floors",
+
+  "enemy_id": "corrupted_packet",
+  "name": "Corrupted Data Packet",
+  "description": "A damaged data packet wandering aimlessly through the CAN bus. Weak but unpredictable.",
+
+  "visual": {
+    "ascii_char": "p",
+    "color": "red",
+    "render_order": 3
+  },
+
+  "components": {
+    "_comment": "Component data used to construct this entity",
+
+    "health": {
+      "current_hp": 10,
+      "max_hp": 10
+    },
+
+    "combat": {
+      "damage": 2,
+      "defense": 0,
+      "attack_range": 1
+    },
+
+    "ai": {
+      "behavior": "wander",
+      "aggro_range": 4,
+      "chase_range": 8,
+      "intelligence": "low"
+    }
+  },
+
+  "metadata": {
+    "difficulty_tier": 1,
+    "xp_reward": 5,
+    "tags": ["weak", "common", "can_bus"]
+  }
+}

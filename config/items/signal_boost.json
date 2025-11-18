@@ -1,0 +1,41 @@
+{
+  "_comment": "Signal Boost Item - Consumable health restoration",
+
+  "item_id": "signal_boost",
+  "name": "Signal Boost",
+  "description": "A clean data signal that restores system integrity. Heals 20 HP.",
+
+  "visual": {
+    "ascii_char": "!",
+    "color": "cyan",
+    "render_order": 1
+  },
+
+  "properties": {
+    "item_type": "consumable",
+    "stackable": true,
+    "max_stack": 5,
+    "usable": true
+  },
+
+  "effects": {
+    "_comment": "Effects applied when item is used",
+    "on_use": [
+      {
+        "effect_type": "heal",
+        "value": 20,
+        "target": "self"
+      },
+      {
+        "effect_type": "message",
+        "text": "The signal boost restores your system integrity."
+      }
+    ]
+  },
+
+  "metadata": {
+    "rarity": "common",
+    "value": 10,
+    "tags": ["healing", "consumable", "starter"]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_comment": "Floor 1: CAN Bus Level - Educational dungeon floor definition",
+  "_educational_note": "This JSON file demonstrates data-driven content design. Game data lives in configuration files separate from code, allowing easy modification without touching Python files.",
+
+  "floor_id": 1,
+  "name": "CAN Bus Level",
+  "description": "The entry point to the ECU system. Corrupted data packets roam freely through the communication bus.",
+  "theme": "can_bus",
+
+  "dimensions": {
+    "_comment": "Map size in tiles",
+    "width": 40,
+    "height": 25
+  },
+
+  "generation": {
+    "_comment": "Parameters for procedural dungeon generation (will be used in Phase 2)",
+    "algorithm": "bsp",
+    "room_count_min": 5,
+    "room_count_max": 8,
+    "room_size_min": 4,
+    "room_size_max": 10,
+    "corridor_width": 1
+  },
+
+  "tile_distribution": {
+    "_comment": "Percentage of special tiles to place after room generation",
+    "hazard_tiles": 0.03,
+    "door_tiles": 0.02
+  },
+
+  "enemy_spawns": [
+    {
+      "_comment": "Weak enemies for first floor",
+      "enemy_type": "corrupted_packet",
+      "count_min": 3,
+      "count_max": 5,
+      "spawn_weight": 70
+    },
+    {
+      "enemy_type": "signal_glitch",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 30
+    }
+  ],
+
+  "item_spawns": [
+    {
+      "_comment": "Helpful items for new players",
+      "item_type": "signal_boost",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 50
+    },
+    {
+      "item_type": "diagnostic_tool",
+      "count_min": 1,
+      "count_max": 1,
+      "spawn_weight": 50
+    }
+  ],
+
+  "stairs": {
+    "_comment": "Stair placement strategy",
+    "stairs_down": {
+      "enabled": true,
+      "placement": "random_room"
+    },
+    "stairs_up": {
+      "enabled": false
+    }
+  },
+
+  "difficulty": {
+    "_comment": "Overall difficulty parameters",
+    "level": 1,
+    "enemy_health_multiplier": 1.0,
+    "enemy_damage_multiplier": 1.0
+  },
+
+  "metadata": {
+    "_comment": "Optional metadata for UI/documentation",
+    "author": "Game Designer",
+    "version": "1.0",
+    "tags": ["tutorial", "beginner", "can_bus"]
+  }
+}
