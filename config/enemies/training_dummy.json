@@ -1,0 +1,59 @@
+{
+  "_comment": "Training Dummy - Non-aggressive practice target",
+  "_educational_note": "This enemy never attacks - perfect for teaching combat basics safely",
+
+  "enemy_id": "training_dummy",
+  "name": "Training Dummy",
+  "description": "A simulated entity designed for combat practice. It takes damage but never fights back, making it perfect for learning attack mechanics.",
+
+  "visual": {
+    "ascii_char": "d",
+    "color": "gray",
+    "render_order": 3
+  },
+
+  "components": {
+    "_comment": "Dummy has health but no combat ability",
+
+    "health": {
+      "current_hp": 15,
+      "max_hp": 15
+    },
+
+    "combat": {
+      "_comment": "Zero damage - completely harmless",
+      "damage": 0,
+      "defense": 0,
+      "attack_range": 0,
+      "accuracy": 0.0,
+      "_note": "This dummy will never attack the player"
+    },
+
+    "ai": {
+      "_comment": "Stationary - doesn't move or react",
+      "behavior": "idle",
+      "aggro_range": 0,
+      "chase_range": 0,
+      "intelligence": "none",
+      "_note": "Completely passive AI"
+    }
+  },
+
+  "metadata": {
+    "difficulty_tier": 0,
+    "xp_reward": 2,
+    "hp_scaling": 1.0,
+    "tags": ["tutorial", "harmless", "practice", "stationary"],
+    "signal_drops": [
+      {
+        "_comment": "Drops sensor signals for crafting tutorial",
+        "signal_type": "sensor_reading",
+        "quantity": 2,
+        "drop_chance": 1.0
+      }
+    ],
+    "death_message": "The training dummy shatters into data fragments.",
+    "aggro_message": null,
+    "_note": "Perfect for teaching combat without risk"
+  }
+}

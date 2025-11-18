@@ -1,0 +1,52 @@
+{
+  "_comment": "Sensor Reading Signal - Basic crafting material",
+  "_educational_note": "Common signal used in many beginner recipes",
+
+  "item_id": "sensor_reading_signal",
+  "name": "Sensor Reading",
+  "description": "Raw sensor data from the ECU. Can be processed and combined with other signals for various effects. A fundamental crafting component.",
+
+  "visual": {
+    "ascii_char": "~",
+    "color": "cyan",
+    "render_order": 1
+  },
+
+  "properties": {
+    "item_type": "signal",
+    "stackable": true,
+    "max_stack": 99,
+    "usable": false,
+    "_note": "Crafting material - use in recipes, not directly"
+  },
+
+  "signals": {
+    "_comment": "Signal type and properties",
+    "signal_type": "sensor_data",
+    "strength": 0.5,
+    "purity": 0.8,
+    "frequency": "low"
+  },
+
+  "crafting_uses": {
+    "_comment": "Recipes that use this signal",
+    "used_in": [
+      "basic_heal",
+      "diagnostic_scan",
+      "system_reboot",
+      "signal_amplification"
+    ]
+  },
+
+  "metadata": {
+    "rarity": "common",
+    "value": 5,
+    "tags": ["signal", "crafting", "consumable", "common"],
+    "drop_sources": [
+      "Most enemies drop 1-2",
+      "Found in early floors",
+      "Tutorial rewards"
+    ],
+    "_note": "Essential early-game crafting material"
+  }
+}

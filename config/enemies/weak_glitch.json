@@ -1,0 +1,64 @@
+{
+  "_comment": "Weak Glitch - Very weak tutorial enemy",
+  "_educational_note": "Slightly stronger than dummy but still very weak - teaches reactive combat",
+
+  "enemy_id": "weak_glitch",
+  "name": "Minor Glitch",
+  "description": "A tiny data anomaly barely capable of causing harm. Perfect for new processes learning to defend themselves.",
+
+  "visual": {
+    "ascii_char": "g",
+    "color": "yellow",
+    "render_order": 3
+  },
+
+  "components": {
+    "_comment": "Very low stats for safe combat practice",
+
+    "health": {
+      "current_hp": 5,
+      "max_hp": 5
+    },
+
+    "combat": {
+      "_comment": "Minimal damage to avoid player death",
+      "damage": 1,
+      "defense": 0,
+      "attack_range": 1,
+      "accuracy": 0.5,
+      "crit_chance": 0.0,
+      "_note": "Only 1 damage - very safe for learning"
+    },
+
+    "ai": {
+      "_comment": "Wanders randomly, only attacks when adjacent",
+      "behavior": "wander",
+      "aggro_range": 2,
+      "chase_range": 3,
+      "intelligence": "very_low",
+      "_note": "Non-aggressive unless player approaches"
+    }
+  },
+
+  "metadata": {
+    "difficulty_tier": 0,
+    "xp_reward": 3,
+    "hp_scaling": 1.0,
+    "tags": ["tutorial", "weak", "safe", "beginner"],
+    "signal_drops": [
+      {
+        "signal_type": "sensor_reading",
+        "quantity": 1,
+        "drop_chance": 1.0
+      },
+      {
+        "signal_type": "corrupted_data",
+        "quantity": 1,
+        "drop_chance": 0.5
+      }
+    ],
+    "death_message": "The minor glitch dissipates harmlessly.",
+    "aggro_message": "The glitch notices you but seems uncertain...",
+    "_note": "Designed to barely threaten even new players"
+  }
+}
