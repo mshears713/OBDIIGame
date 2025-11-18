@@ -1,0 +1,93 @@
+{
+  "_comment": "Floor 2: Fuel Injection System - Intermediate difficulty",
+
+  "floor_id": 2,
+  "name": "Fuel Injection Chamber",
+  "description": "A maze of fuel lines and injection valves. Pressure anomalies create dangerous hazards.",
+  "theme": "fuel_injection",
+
+  "dimensions": {
+    "width": 50,
+    "height": 30
+  },
+
+  "generation": {
+    "algorithm": "bsp",
+    "room_count_min": 7,
+    "room_count_max": 12,
+    "room_size_min": 5,
+    "room_size_max": 12,
+    "corridor_width": 1
+  },
+
+  "tile_distribution": {
+    "hazard_tiles": 0.05,
+    "door_tiles": 0.03
+  },
+
+  "enemy_spawns": [
+    {
+      "enemy_type": "corrupted_packet",
+      "count_min": 2,
+      "count_max": 4,
+      "spawn_weight": 40
+    },
+    {
+      "enemy_type": "signal_glitch",
+      "count_min": 2,
+      "count_max": 3,
+      "spawn_weight": 40
+    },
+    {
+      "_comment": "Introduce new enemy type on floor 2",
+      "enemy_type": "injector_fault",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 20
+    }
+  ],
+
+  "item_spawns": [
+    {
+      "item_type": "signal_boost",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 40
+    },
+    {
+      "item_type": "diagnostic_tool",
+      "count_min": 1,
+      "count_max": 2,
+      "spawn_weight": 40
+    },
+    {
+      "item_type": "error_correction",
+      "count_min": 0,
+      "count_max": 1,
+      "spawn_weight": 20
+    }
+  ],
+
+  "stairs": {
+    "stairs_down": {
+      "enabled": true,
+      "placement": "random_room"
+    },
+    "stairs_up": {
+      "enabled": true,
+      "placement": "opposite_corner"
+    }
+  },
+
+  "difficulty": {
+    "level": 2,
+    "enemy_health_multiplier": 1.2,
+    "enemy_damage_multiplier": 1.1
+  },
+
+  "metadata": {
+    "author": "Game Designer",
+    "version": "1.0",
+    "tags": ["intermediate", "fuel_injection", "hazards"]
+  }
+}
