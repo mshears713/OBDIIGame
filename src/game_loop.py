@@ -40,7 +40,16 @@ from src.procedural import DungeonGenerator, Room
 from src.systems.renderer import Renderer
 from src.systems.movement import MovementSystem
 from src.systems.input_handler import InputHandler, Action, Command
-from src.components import PositionComponent
+from src.systems.ai import AISystem
+from src.systems.combat import CombatSystem
+from src.components import (
+    PositionComponent,
+    AIComponent,
+    HealthComponent,
+    InventoryComponent,
+    NameComponent,
+    SignalComponent
+)
 
 
 class GameState(Enum):
@@ -117,13 +126,25 @@ class Game:
 
         self.player = create_player(x=start_x, y=start_y, name="Player")
 
-        # Entity list (player + enemies + items in future)
-        self.entities: List[Entity] = [self.player]
+        # Populate dungeon with enemies and items
+        spawned_entities = generator.populate_dungeon(
+            dungeon_map=self.game_map,
+            floor_level=1,
+            enemies_per_room=(1, 2),
+            items_per_room=(0, 1),
+            enemy_chance=0.7,
+            item_chance=0.4
+        )
+
+        # Entity list (player + spawned entities)
+        self.entities: List[Entity] = [self.player] + spawned_entities
 
         # Initialize systems
         self.renderer = Renderer(self.game_map)
         self.movement_system = MovementSystem(self.game_map)
         self.input_handler = InputHandler()
+        self.combat_system = CombatSystem()
+        self.ai_system = AISystem(self.game_map, self.movement_system)
 
         # Welcome message
         self.add_message("Welcome to the OBDII Game! Explore the ECU system.")
@@ -200,7 +221,9 @@ class Game:
         Educational Note:
             The UI shows important information:
             - Player health
+            - Inventory status
             - Turn counter
+            - Visible enemies
             - Recent messages
             - Controls reminder
 
@@ -211,15 +234,25 @@ class Game:
         current_hp, max_hp = get_player_health(self.player)
         hp_percentage = (current_hp / max_hp) * 100 if max_hp > 0 else 0
 
-        # Create HP bar
+        # Create HP bar with color coding
         bar_width = 20
         filled = int((current_hp / max_hp) * bar_width) if max_hp > 0 else 0
         hp_bar = '█' * filled + '░' * (bar_width - filled)
 
+        # Get inventory stats
+        inventory = self.player.get_component(InventoryComponent)
+        item_count = inventory.count_items() if inventory else 0
+        max_items = inventory.max_capacity if inventory else 0
+
+        # Count visible enemies
+        enemy_count = sum(1 for e in self.entities if e.has_tag("enemy") and e.has_component(HealthComponent))
+
         # Display stats
         print("\n" + "═" * 80)
-        print(f"HP: [{hp_bar}] {current_hp}/{max_hp} ({hp_percentage:.0f}%)")
-        print(f"Turn: {self.turn_count}")
+        print(f"HP: [{hp_bar}] {current_hp}/{max_hp} ({hp_percentage:.0f}%)  |  " +
+              f"Items: {item_count}/{max_items}  |  " +
+              f"Enemies: {enemy_count}  |  " +
+              f"Turn: {self.turn_count}")
 
         # Display recent messages (last 5)
         print("\n" + "─" * 80)
@@ -227,6 +260,7 @@ class Game:
         for msg in self.message_log[-5:]:
             print(f"  {msg}")
         print("─" * 80)
+        print("  [WASD/Arrows: Move] [.: Wait] [Q: Quit] [?: Help]")
 
     def get_player_input(self) -> Optional['Command']:
         """
@@ -290,17 +324,92 @@ class Game:
             return
 
         elif self.input_handler.is_movement_action(command.action):
-            # Try to move player
+            # Calculate target position
+            player_pos = self.player.get_component(PositionComponent)
+            if not player_pos:
+                return
+
+            target_x = player_pos.x + command.dx
+            target_y = player_pos.y + command.dy
+
+            # Check if there's an entity at target position
+            target_entity = self.combat_system.get_entity_at_position(
+                target_x, target_y, self.entities, exclude=self.player
+            )
+
+            if target_entity:
+                # There's an entity at target - check if it's alive and attackable
+                target_health = target_entity.get_component(HealthComponent)
+                if target_health and target_health.is_alive():
+                    # Attack the entity
+                    self.combat_system.melee_attack(
+                        self.player, target_entity, self.message_log
+                    )
+                    self.end_turn()
+                    return
+
+            # No entity or entity is dead - try to move
             success = self.movement_system.try_move(self.player, command.dx, command.dy)
 
             if success:
-                # Movement succeeded
-                self.add_message(f"You move.")
+                # Movement succeeded - check for auto-pickup
+                self.try_auto_pickup()
                 self.end_turn()
             else:
                 # Movement failed (wall, etc.)
                 self.add_message("You can't move there!")
                 # Don't end turn - let player try again
+
+    def try_auto_pickup(self) -> None:
+        """
+        Attempt to automatically pick up items at player's position.
+
+        Educational Note:
+            Auto-pickup happens after successful movement. Items at the
+            player's new position are automatically picked up if there's
+            inventory space.
+
+            Alternative designs:
+            - Manual pickup only (press 'g' to get items)
+            - Prompt before picking up
+            - Pick up only specific item types (auto-pickup gold)
+        """
+        player_pos = self.player.get_component(PositionComponent)
+        inventory = self.player.get_component(InventoryComponent)
+
+        if not player_pos or not inventory:
+            return
+
+        # Find items at player position
+        items_at_position = []
+        for entity in self.entities:
+            if entity == self.player:
+                continue
+
+            # Check if entity is an item
+            if not entity.has_tag("item"):
+                continue
+
+            pos = entity.get_component(PositionComponent)
+            if pos and pos.x == player_pos.x and pos.y == player_pos.y:
+                items_at_position.append(entity)
+
+        # Try to pick up each item
+        for item in items_at_position:
+            if inventory.is_full():
+                self.add_message("Your inventory is full!")
+                break
+
+            # Add item to inventory
+            if inventory.add_item(item):
+                # Remove from world
+                self.entities.remove(item)
+
+                # Get item name
+                name_comp = item.get_component(NameComponent)
+                item_name = name_comp.name if name_comp else "item"
+
+                self.add_message(f"Picked up {item_name}.")
 
     def end_turn(self) -> None:
         """
@@ -309,19 +418,39 @@ class Game:
         Educational Note:
             Ending a turn triggers all time-based updates:
             - Increment turn counter
-            - Process enemy turns (future)
+            - Process enemy turns
+            - Remove dead entities
             - Apply status effects (future)
             - Regeneration (future)
             - etc.
-
-            For now, we just increment the counter.
         """
         self.turn_count += 1
 
-        # Future: Process enemy turns here
-        # for entity in self.entities:
-        #     if entity != self.player and entity.has_component(AIComponent):
-        #         ai_system.process(entity)
+        # Process enemy turns
+        for entity in self.entities:
+            if entity != self.player and entity.has_component(AIComponent):
+                self.ai_system.process(entity, self.player, self.entities, self.combat_system, self.message_log)
+
+        # Remove dead entities
+        living_entities, dead_entities = self.combat_system.remove_dead_entities(self.entities)
+
+        # Process dead entities - transfer signals to player
+        player_signals = self.player.get_component(SignalComponent)
+        if player_signals:
+            for dead_entity in dead_entities:
+                # Get entity signals
+                entity_signals = dead_entity.get_component(SignalComponent)
+                if entity_signals:
+                    # Transfer each signal type
+                    for signal_type in entity_signals.get_all_signal_types():
+                        quantity = entity_signals.get_signal_count(signal_type)
+                        if quantity > 0:
+                            # Try to add to player signals
+                            added = player_signals.add_signal(signal_type, quantity)
+                            if added > 0:
+                                self.add_message(f"Collected {added}x {signal_type} signal(s)!")
+
+        self.entities = living_entities
 
     def check_game_over(self) -> None:
         """

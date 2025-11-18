@@ -32,6 +32,7 @@ import random
 from typing import List, Tuple, Optional
 from dataclasses import dataclass
 from src.models import Map, Tile, TileType
+from src.entities.entity import Entity
 
 
 @dataclass
@@ -462,3 +463,145 @@ class DungeonGenerator:
             return None
 
         return random.choice(floor_tiles)
+
+    def populate_dungeon(
+        self,
+        dungeon_map: Map,
+        floor_level: int = 1,
+        enemies_per_room: Tuple[int, int] = (1, 3),
+        items_per_room: Tuple[int, int] = (0, 2),
+        enemy_chance: float = 0.8,
+        item_chance: float = 0.5
+    ) -> List[Entity]:
+        """
+        Populate dungeon with enemies and items.
+
+        Args:
+            dungeon_map: The generated dungeon map
+            floor_level: Current dungeon floor level (affects enemy difficulty)
+            enemies_per_room: (min, max) enemies to spawn per room
+            items_per_room: (min, max) items to spawn per room
+            enemy_chance: Probability (0.0-1.0) that a room has enemies
+            item_chance: Probability (0.0-1.0) that a room has items
+
+        Returns:
+            List of all spawned entities (enemies and items)
+
+        Educational Note:
+            Dungeon population is crucial for gameplay. We:
+            1. Skip the first room (player spawn point)
+            2. For each other room, roll dice:
+               - Should this room have enemies? (enemy_chance)
+               - Should this room have items? (item_chance)
+            3. Spawn appropriate number of entities
+            4. Place them at random walkable positions in the room
+
+            Balance considerations:
+            - Early rooms: fewer/weaker enemies
+            - Later rooms: more/stronger enemies
+            - Items should be valuable but not overwhelming
+            - Leave some rooms empty for exploration/breather
+
+        Example:
+            >>> generator = DungeonGenerator(width=50, height=30)
+            >>> dungeon_map = generator.generate()
+            >>> entities = generator.populate_dungeon(
+            ...     dungeon_map,
+            ...     floor_level=1,
+            ...     enemies_per_room=(1, 2),
+            ...     items_per_room=(0, 1)
+            ... )
+            >>> # Returns list of spawned enemies and items
+        """
+        from src.data_loader.entity_factory import EntityFactory
+
+        factory = EntityFactory()
+        spawned_entities: List[Entity] = []
+
+        # Available enemy and item types (could be loaded from config)
+        enemy_types = ["corrupted_packet"]
+        item_types = ["signal_boost"]
+
+        # Skip first room (player spawns there)
+        # Process remaining rooms
+        for room in self.rooms[1:]:
+            # Get room's floor tiles (excluding walls)
+            floor_tiles = room.inner_tiles()
+            if not floor_tiles:
+                continue
+
+            # Randomly available spawn positions
+            available_positions = floor_tiles.copy()
+            random.shuffle(available_positions)
+
+            # Spawn enemies
+            if random.random() < enemy_chance:
+                num_enemies = random.randint(enemies_per_room[0], enemies_per_room[1])
+
+                for _ in range(min(num_enemies, len(available_positions))):
+                    if not available_positions:
+                        break
+
+                    # Pick random enemy type
+                    enemy_type = random.choice(enemy_types)
+
+                    # Get spawn position
+                    x, y = available_positions.pop()
+
+                    # Create enemy
+                    enemy = factory.create_enemy(enemy_type, x=x, y=y, floor_level=floor_level)
+                    if enemy:
+                        spawned_entities.append(enemy)
+
+            # Spawn items
+            if random.random() < item_chance:
+                num_items = random.randint(items_per_room[0], items_per_room[1])
+
+                for _ in range(min(num_items, len(available_positions))):
+                    if not available_positions:
+                        break
+
+                    # Pick random item type
+                    item_type = random.choice(item_types)
+
+                    # Get spawn position
+                    x, y = available_positions.pop()
+
+                    # Create item
+                    item = factory.create_item(item_type, x=x, y=y)
+                    if item:
+                        spawned_entities.append(item)
+
+        return spawned_entities
+
+    def get_random_position_in_room(self, room: Room, dungeon_map: Map) -> Optional[Tuple[int, int]]:
+        """
+        Get a random walkable position within a specific room.
+
+        Args:
+            room: The room to find a position in
+            dungeon_map: The dungeon map (for walkability check)
+
+        Returns:
+            (x, y) tuple of random floor tile in room, or None if room has no floor tiles
+
+        Educational Note:
+            This is useful for spawning entities in specific rooms rather than
+            random positions across the entire dungeon.
+
+        Example:
+            >>> generator = DungeonGenerator(width=50, height=30)
+            >>> dungeon_map = generator.generate()
+            >>> room = generator.rooms[2]  # Third room
+            >>> x, y = generator.get_random_position_in_room(room, dungeon_map)
+            >>> # Returns random position inside room 2
+        """
+        walkable_tiles = [
+            (x, y) for x, y in room.inner_tiles()
+            if dungeon_map.is_walkable(x, y)
+        ]
+
+        if not walkable_tiles:
+            return None
+
+        return random.choice(walkable_tiles)

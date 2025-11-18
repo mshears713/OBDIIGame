@@ -26,6 +26,9 @@ from src.components.input import InputComponent
 from src.components.signal import SignalComponent
 from src.components.status_effect import StatusEffectComponent, StatusEffect
 from src.components.tile_effect import TileEffectComponent
+from src.components.ai import AIComponent, AIBehavior
+from src.components.combat import CombatComponent
+from src.components.inventory import InventoryComponent
 
 __all__ = [
     'Component',
@@ -38,6 +41,10 @@ __all__ = [
     'StatusEffectComponent',
     'StatusEffect',
     'TileEffectComponent',
+    'AIComponent',
+    'AIBehavior',
+    'CombatComponent',
+    'InventoryComponent',
     'create_player_render',
     'create_enemy_render',
     'create_item_render',
