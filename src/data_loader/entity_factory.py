@@ -32,7 +32,9 @@ from src.components import (
     HealthComponent,
     NameComponent,
     SignalComponent,
-    InputComponent
+    InputComponent,
+    AIComponent,
+    CombatComponent
 )
 from src.data_loader.json_loader import JSONLoader
 
@@ -151,11 +153,29 @@ class EntityFactory:
                 health.restore_to_full()
             entity.add_component(health)
 
-        # Combat component (placeholder for future)
-        # Will be implemented in a future step
+        # Combat component
+        if "combat" in components_data:
+            combat_data = components_data["combat"]
+            combat = CombatComponent(
+                damage=combat_data.get("damage", 1),
+                defense=combat_data.get("defense", 0),
+                attack_range=combat_data.get("attack_range", 1),
+                accuracy=combat_data.get("accuracy", 1.0),
+                critical_chance=combat_data.get("critical_chance", 0.0),
+                critical_multiplier=combat_data.get("critical_multiplier", 2.0)
+            )
+            entity.add_component(combat)
 
-        # AI component (placeholder for future)
-        # Will be implemented in a future step
+        # AI component
+        if "ai" in components_data:
+            ai_data = components_data["ai"]
+            ai = AIComponent(
+                behavior=ai_data.get("behavior", "wander"),
+                aggro_range=ai_data.get("aggro_range", 4),
+                chase_range=ai_data.get("chase_range", 8),
+                intelligence=ai_data.get("intelligence", "low")
+            )
+            entity.add_component(ai)
 
         # Signal component - enemies can drop signals
         signals = SignalComponent(max_signal_types=5, max_per_signal=3)

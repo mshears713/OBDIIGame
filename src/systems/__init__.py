@@ -18,6 +18,8 @@ from src.systems.movement import MovementSystem
 from src.systems.input_handler import InputHandler, Action, Command
 from src.systems.crafting import CraftingSystem, Recipe, get_crafting_system, reset_crafting_system
 from src.systems.save_load import SaveLoadSystem, get_save_load_system
+from src.systems.ai import AISystem
+from src.systems.combat import CombatSystem
 
 __all__ = [
     'Renderer',
@@ -31,4 +33,6 @@ __all__ = [
     'reset_crafting_system',
     'SaveLoadSystem',
     'get_save_load_system',
+    'AISystem',
+    'CombatSystem',
 ]

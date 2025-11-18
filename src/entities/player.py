@@ -31,6 +31,9 @@ from src.components import (
     HealthComponent,
     NameComponent,
     InputComponent,
+    CombatComponent,
+    InventoryComponent,
+    SignalComponent,
     create_player_render
 )
 
@@ -94,6 +97,22 @@ def create_player(x: int = 0, y: int = 0, name: str = "Player") -> Entity:
 
     # Add input component (marks as player-controlled)
     player.add_component(InputComponent())
+
+    # Add combat component (5 damage, 1 defense, melee range)
+    player.add_component(CombatComponent(
+        damage=5,
+        defense=1,
+        attack_range=1,
+        accuracy=0.9,  # 90% hit chance
+        critical_chance=0.1,  # 10% crit chance
+        critical_multiplier=2.0
+    ))
+
+    # Add inventory component (20 item capacity)
+    player.add_component(InventoryComponent(max_capacity=20))
+
+    # Add signal component (for collecting signals from enemies)
+    player.add_component(SignalComponent(max_signal_types=10, max_per_signal=99))
 
     return player
 
