@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  ecu-rogue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecu-rogue-game
+
+    # Interactive terminal support
+    stdin_open: true
+    tty: true
+
+    # Volume mount for persistent save games
+    volumes:
+      - ./saves:/app/saves
+
+    # Environment variables (customize as needed)
+    environment:
+      - TERM=xterm-256color
+      - PYTHONUNBUFFERED=1
+
+    # Network mode (not needed for this game, but included for completeness)
+    network_mode: bridge
+
+    # Resource limits (optional - adjust based on your system)
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '1.0'
+    #       memory: 512M
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 256M
+
+# Create a named volume for save games (alternative to bind mount)
+volumes:
+  game-saves:
+    driver: local

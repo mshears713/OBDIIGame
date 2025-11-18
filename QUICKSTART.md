@@ -4,9 +4,76 @@
 
 This guide will get you playing in under 5 minutes.
 
+**Choose your installation method:**
+- **🐳 Docker** (Recommended for Windows/WSL) - No Python installation needed!
+- **🐍 Native Python** - Direct installation on your system
+
 ---
 
-## Installation
+## 🐳 Docker Installation (Windows/WSL/Linux/macOS)
+
+### Prerequisites
+
+- **Docker Desktop** (Windows/macOS) or **Docker Engine** (Linux/WSL)
+  - Windows: [Download Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - WSL2: [Install Docker in WSL](https://docs.docker.com/desktop/wsl/)
+  - Linux: `sudo apt-get install docker.io docker-compose` (Ubuntu/Debian)
+  - macOS: [Download Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+### Quick Start with Docker
+
+#### Option 1: Using Docker Compose (Easiest)
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+
+# Build and run the game
+docker-compose up --build
+
+# When done playing, press Ctrl+C to stop
+```
+
+#### Option 2: Using Docker CLI
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+
+# Build the Docker image
+docker build -t ecu-rogue .
+
+# Run the game
+docker run -it --rm -v ${PWD}/saves:/app/saves ecu-rogue
+
+# For Windows PowerShell, use:
+docker run -it --rm -v ${PWD}/saves:/app/saves ecu-rogue
+
+# For Windows CMD, use:
+docker run -it --rm -v %cd%/saves:/app/saves ecu-rogue
+```
+
+### Docker Tips
+
+**Save Games:** Your progress is automatically saved to the `saves/` folder in your project directory.
+
+**Stop the Game:** Press `Ctrl+C` to exit.
+
+**Rebuild after updates:**
+```bash
+docker-compose build --no-cache
+```
+
+**Remove containers:**
+```bash
+docker-compose down
+```
+
+---
+
+## 🐍 Native Python Installation
 
 ### Prerequisites
 
@@ -30,15 +97,97 @@ pip install -r requirements.txt
 
 That's it! The game uses minimal dependencies (only `pytest` for development).
 
----
-
-## Running the Game
-
-### Start the Game
+### Step 3: Run the Game
 
 ```bash
 python main.py
 ```
+
+---
+
+## Platform-Specific Instructions
+
+### Windows 10/11 (Native)
+
+**Using Docker (Recommended):**
+1. Install Docker Desktop for Windows
+2. Enable WSL2 integration in Docker Desktop settings
+3. Follow Docker installation steps above
+
+**Using Python:**
+```powershell
+# Install Python from Microsoft Store or python.org
+# Open PowerShell
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+pip install -r requirements.txt
+python main.py
+```
+
+### Windows Subsystem for Linux (WSL)
+
+**Using Docker:**
+```bash
+# Make sure Docker Desktop is running on Windows
+# In WSL terminal:
+cd ~
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+docker-compose up --build
+```
+
+**Using Python:**
+```bash
+sudo apt update
+sudo apt install python3 python3-pip git
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+pip3 install -r requirements.txt
+python3 main.py
+```
+
+### Linux (Ubuntu/Debian)
+
+```bash
+# Install Docker (optional but recommended)
+sudo apt-get update
+sudo apt-get install docker.io docker-compose
+
+# Or install Python
+sudo apt-get install python3 python3-pip
+
+# Clone and run
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+
+# With Docker:
+docker-compose up --build
+
+# Or with Python:
+pip3 install -r requirements.txt
+python3 main.py
+```
+
+### macOS
+
+```bash
+# Install Docker Desktop for Mac (recommended)
+# Or install Python via Homebrew:
+brew install python3
+
+# Clone and run
+git clone https://github.com/yourusername/OBDIIGame.git
+cd OBDIIGame
+
+# With Docker:
+docker-compose up --build
+
+# Or with Python:
+pip3 install -r requirements.txt
+python3 main.py
+```
+
+---
 
 ### First Time Playing?
 
