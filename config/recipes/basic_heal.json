@@ -1,0 +1,67 @@
+{
+  "_comment": "Basic Error Correction Recipe - Simple healing signal craft",
+  "_educational_note": "This recipe demonstrates signal-crafting basics. Players combine diagnostic signals to create a healing effect, simulating error correction in ECU systems.",
+
+  "recipe_id": "basic_heal",
+  "name": "Error Correction Routine",
+  "description": "Combines sensor readings with error correction protocols to restore system integrity. A fundamental diagnostic procedure.",
+
+  "category": "defensive",
+
+  "inputs": [
+    {
+      "_comment": "Requires two sensor reading signals",
+      "signal_type": "sensor_reading",
+      "quantity": 2,
+      "consumed": true
+    },
+    {
+      "_comment": "Requires one error correction signal (not consumed - reusable algorithm)",
+      "signal_type": "error_correction",
+      "quantity": 1,
+      "consumed": false
+    }
+  ],
+
+  "outputs": [
+    {
+      "_comment": "Produces a healing signal that restores HP",
+      "signal_type": "healing_pulse",
+      "quantity": 1,
+      "properties": {
+        "duration": 0,
+        "power": 15
+      }
+    }
+  ],
+
+  "requirements": {
+    "_comment": "Available from floor 1, no special requirements",
+    "min_floor": 1,
+    "special_item": null,
+    "skill_check": null
+  },
+
+  "effects": {
+    "on_craft": [
+      {
+        "effect_type": "heal",
+        "target": "self",
+        "value": 15
+      },
+      {
+        "effect_type": "message",
+        "text": "You synthesize an error correction signal. System integrity restored!",
+        "color": "green"
+      }
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "easy",
+    "discoverable": true,
+    "hint": "Sensor data can be processed to correct system errors...",
+    "tags": ["healing", "starter", "defensive", "tutorial"],
+    "version": "1.0"
+  }
+}

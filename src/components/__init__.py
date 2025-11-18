@@ -23,6 +23,9 @@ from src.components.render import (
 from src.components.health import HealthComponent
 from src.components.name import NameComponent
 from src.components.input import InputComponent
+from src.components.signal import SignalComponent
+from src.components.status_effect import StatusEffectComponent, StatusEffect
+from src.components.tile_effect import TileEffectComponent
 
 __all__ = [
     'Component',
@@ -31,6 +34,10 @@ __all__ = [
     'HealthComponent',
     'NameComponent',
     'InputComponent',
+    'SignalComponent',
+    'StatusEffectComponent',
+    'StatusEffect',
+    'TileEffectComponent',
     'create_player_render',
     'create_enemy_render',
     'create_item_render',

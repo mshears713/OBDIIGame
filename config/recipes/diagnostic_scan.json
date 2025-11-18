@@ -1,0 +1,67 @@
+{
+  "_comment": "Diagnostic Scanner Recipe - Reveals enemy information",
+  "_educational_note": "Simulates OBD-II diagnostic scanning where queries are sent to ECU modules to retrieve status information and DTCs.",
+
+  "recipe_id": "diagnostic_scan",
+  "name": "Active Diagnostic Scan",
+  "description": "Sends ECU query signals to probe enemy systems, revealing their health, status, and vulnerabilities.",
+
+  "category": "diagnostic",
+
+  "inputs": [
+    {
+      "_comment": "Query signals to interrogate enemy systems",
+      "signal_type": "ecu_query",
+      "quantity": 3,
+      "consumed": true
+    },
+    {
+      "_comment": "Scanner pulse to broadcast the query",
+      "signal_type": "scanner_pulse",
+      "quantity": 1,
+      "consumed": true
+    }
+  ],
+
+  "outputs": [
+    {
+      "_comment": "Produces a diagnostic report signal",
+      "signal_type": "diagnostic_report",
+      "quantity": 1,
+      "properties": {
+        "duration": 10,
+        "power": 5,
+        "_note": "Lasts 10 turns, reveals info on up to 5 enemies"
+      }
+    }
+  ],
+
+  "requirements": {
+    "min_floor": 1,
+    "special_item": null,
+    "skill_check": 20
+  },
+
+  "effects": {
+    "on_craft": [
+      {
+        "effect_type": "reveal_enemies",
+        "radius": 10,
+        "information": ["health", "status", "weaknesses"]
+      },
+      {
+        "effect_type": "message",
+        "text": "Diagnostic scan complete. Enemy systems analyzed.",
+        "color": "cyan"
+      }
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "easy",
+    "discoverable": true,
+    "hint": "ECU query signals can be combined with scanning pulses to reveal hidden system information...",
+    "tags": ["diagnostic", "detection", "utility", "information"],
+    "version": "1.0"
+  }
+}
