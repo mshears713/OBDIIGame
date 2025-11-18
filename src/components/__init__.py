@@ -1,15 +1,15 @@
 """
-Components Module
+Component Package
 
-This module provides all component classes for the Entity-Component-System architecture.
+This package contains all component classes for the Entity-Component-System.
 
-Components are data containers that define specific aspects or capabilities of entities.
-Import commonly used components directly from this module for convenience.
-
-Example:
-    >>> from src.components import PositionComponent, RenderComponent
-    >>> position = PositionComponent(x=10, y=20)
-    >>> render = RenderComponent(char='@', color='white')
+Educational Note:
+    Components are data containers that define entity capabilities.
+    By importing them here, other modules can use:
+        from src.components import PositionComponent, HealthComponent
+    instead of:
+        from src.components.position import PositionComponent
+        from src.components.health import HealthComponent
 """
 
 from src.components.base import Component
@@ -20,11 +20,17 @@ from src.components.render import (
     create_enemy_render,
     create_item_render
 )
+from src.components.health import HealthComponent
+from src.components.name import NameComponent
+from src.components.input import InputComponent
 
 __all__ = [
     'Component',
     'PositionComponent',
     'RenderComponent',
+    'HealthComponent',
+    'NameComponent',
+    'InputComponent',
     'create_player_render',
     'create_enemy_render',
     'create_item_render',

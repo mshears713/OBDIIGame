@@ -53,11 +53,12 @@ class ASCIIRenderer:
         # Displays map and entities in terminal
     """
 
-    def __init__(self, width: int = 80, height: int = 24):
+    def __init__(self, dungeon_map: Optional[Map] = None, width: int = 80, height: int = 24):
         """
         Initialize the ASCII renderer.
 
         Args:
+            dungeon_map: Optional dungeon map to render
             width: Rendering width in characters (default 80)
             height: Rendering height in characters (default 24)
 
@@ -68,6 +69,7 @@ class ASCIIRenderer:
         """
         self.width = width
         self.height = height
+        self.dungeon_map = dungeon_map
 
     def render(self, dungeon_map: Map, entities: Optional[List[Entity]] = None,
                camera_x: int = 0, camera_y: int = 0) -> str:
@@ -344,6 +346,31 @@ class ASCIIRenderer:
         bordered_lines.append(bottom)
 
         return '\n'.join(bordered_lines)
+
+
+    def render_all(self, entities: List[Entity], player_pos: tuple) -> None:
+        """
+        Render everything to console (convenience method for game loop).
+
+        Args:
+            entities: All entities to render
+            player_pos: Player position (for centering camera)
+
+        Educational Note:
+            This method combines map rendering and entity rendering in one call.
+            It automatically centers the camera on the player for convenience.
+        """
+        # For now, render without camera offset
+        # Future: Center camera on player
+        self.render_to_console(self.dungeon_map, entities, clear_screen=False)
+
+    def set_map(self, dungeon_map: Map) -> None:
+        """Set the current dungeon map to render."""
+        self.dungeon_map = dungeon_map
+
+
+# Alias for convenience - most code can just use "Renderer"
+Renderer = ASCIIRenderer
 
 
 # Utility function for quick testing
