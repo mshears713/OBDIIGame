@@ -155,6 +155,9 @@ class CombatComponent(Component):
         # Ensure at least 1 damage if any damage is dealt
         if incoming_damage > 0:
             reduced_damage = max(1, reduced_damage)
+        else:
+            # If no incoming damage, ensure we don't return negative values
+            reduced_damage = 0
 
         return reduced_damage
 

@@ -91,14 +91,13 @@ class TestCombatComponent:
     def test_calculate_damage_reduction_zero_damage(self):
         """Test zero damage edge case.
 
-        Note: Current implementation returns negative value (incoming_damage - defense).
-        This should be fixed in Step 38 (boundary checks) to ensure >= 0.
+        Fixed in Phase 5 Step 48: ensure damage reduction never returns negative.
         """
         combat = CombatComponent(defense=5)
         reduced = combat.calculate_damage_reduction(0)
 
-        # Current behavior: returns -5 (needs fixing)
-        assert reduced == -5  # TODO: Should be max(0, reduced)
+        # Fixed: returns 0 for zero incoming damage
+        assert reduced == 0
 
     def test_is_melee_true(self):
         """Test melee detection."""
