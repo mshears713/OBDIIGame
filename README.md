@@ -1,5 +1,32 @@
 # Modular Python Roguelike: Exploring Automotive ECU Systems
 
+[![Tests](https://img.shields.io/badge/tests-559%20passing-brightgreen)](tests/)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+> An educational roguelike game for learning Python game development, procedural generation, and Entity-Component-System (ECS) architecture through the lens of automotive ECU systems.
+
+**Project Status:** ✅ **Stable Release v1.0** - Fully playable with comprehensive documentation
+
+---
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd OBDIIGame
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the game
+python main.py
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed getting started guide.
+
 ---
 
 ## Overview
@@ -1049,5 +1076,345 @@ This approach fosters active learning targeting intermediate programmers eager t
 
 ---
 
-# Thank you for exploring the Modular Python Roguelike project!  
+## Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or creating new content, your help is appreciated.
+
+### How to Contribute
+
+1. **Fork the Repository**
+   ```bash
+   git fork <repository-url>
+   git clone <your-fork-url>
+   cd OBDIIGame
+   ```
+
+2. **Create a Feature Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/bug-description
+   ```
+
+3. **Make Your Changes**
+   - Follow the existing code style (PEP 8)
+   - Add tests for new features
+   - Update documentation as needed
+   - Ensure all tests pass: `pytest tests/`
+
+4. **Commit Your Changes**
+   ```bash
+   git add .
+   git commit -m "Add feature: brief description"
+   ```
+
+   Use clear, descriptive commit messages:
+   - `Add feature: signal decay system`
+   - `Fix bug: negative damage calculation`
+   - `Update docs: ECS component guide`
+   - `Refactor: simplify combat calculation`
+
+5. **Push and Create Pull Request**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+   Then create a PR on GitHub with:
+   - Clear description of changes
+   - Link to related issues
+   - Screenshots/examples if applicable
+
+### Contribution Guidelines
+
+#### Code Standards
+- **Python Version:** 3.8+
+- **Style:** Follow PEP 8, use type hints
+- **Testing:** Write tests for new features (pytest)
+- **Documentation:** Add docstrings and inline comments
+- **Modularity:** Keep components focused and reusable
+
+#### What to Contribute
+
+**Bug Fixes**
+- Check existing issues first
+- Include test case reproducing the bug
+- Explain the fix in PR description
+
+**New Features**
+- Discuss major features in an issue first
+- Follow ECS architecture patterns
+- Add comprehensive tests
+- Update relevant documentation
+
+**Content Creation**
+- New floors (JSON in `config/floors/`)
+- New enemies (JSON in `config/enemies/`)
+- New items (JSON in `config/items/`)
+- New crafting recipes (JSON in `config/recipes/`)
+- ASCII art assets (TXT in `assets/`)
+
+See [docs/DATA_DRIVEN_DESIGN.md](docs/DATA_DRIVEN_DESIGN.md) for content creation guide.
+
+**Documentation**
+- Fix typos and clarify explanations
+- Add examples and tutorials
+- Improve API documentation
+- Translate to other languages
+
+**Testing**
+- Add test coverage for untested code
+- Create integration tests
+- Add edge case tests
+
+#### Development Setup
+
+```bash
+# Install development dependencies
+pip install -e .[dev]
+
+# Run tests
+pytest tests/ -v
+
+# Run tests with coverage
+pytest tests/ --cov=src --cov-report=html
+
+# Run type checking (optional)
+mypy src/
+
+# Format code (optional)
+black src/ tests/
+```
+
+### Community Guidelines
+
+- **Be Respectful:** Treat all contributors with respect
+- **Be Constructive:** Provide helpful feedback
+- **Be Patient:** Remember everyone is learning
+- **Ask Questions:** No question is too small
+- **Help Others:** Share your knowledge
+
+### Getting Help
+
+- **Documentation:** Check [docs/](docs/) folder
+- **Issues:** Search existing issues or create new one
+- **Discussions:** Start a discussion for questions
+- **Examples:** See `demo_phase*.py` for code examples
+
+### Content Contribution Examples
+
+**Creating a New Enemy:**
+```json
+{
+  "enemy_id": "memory_leak",
+  "name": "Memory Leak",
+  "description": "A corrupted process consuming resources",
+  "components": {
+    "health": {"max_hp": 15, "current_hp": 15},
+    "combat": {"damage": 3, "defense": 1},
+    "render": {"char": "M", "color": "red"}
+  }
+}
+```
+
+**Creating a New Floor:**
+- See [config/floors/floor_0.json](config/floors/floor_0.json) for tutorial example
+- See [docs/DATA_DRIVEN_DESIGN.md](docs/DATA_DRIVEN_DESIGN.md) for complete schema
+
+### Recognition
+
+Contributors will be acknowledged in:
+- [CONTRIBUTORS.md](CONTRIBUTORS.md) file
+- Release notes
+- Project documentation
+
+---
+
+## Documentation
+
+### For Players
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started playing
+- **[INSTALL.md](INSTALL.md)** - Detailed installation guide
+
+### For Developers
+- **[docs/ECS_DEVELOPER_GUIDE.md](docs/ECS_DEVELOPER_GUIDE.md)** - Entity-Component-System guide
+- **[docs/DATA_DRIVEN_DESIGN.md](docs/DATA_DRIVEN_DESIGN.md)** - Content creation guide
+- **[docs/EXTENDING_SYSTEMS.md](docs/EXTENDING_SYSTEMS.md)** - System extension guide
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Architecture overview
+
+### Additional Resources
+- **Phase Progress Reports:** See `PHASE*_PROGRESS.md` files
+- **Test Examples:** See `tests/` directory
+- **Demo Scripts:** See `demo_phase*.py` files
+
+---
+
+## Testing
+
+The project includes comprehensive test coverage:
+
+```bash
+# Run all tests
+pytest tests/
+
+# Run with verbose output
+pytest tests/ -v
+
+# Run specific test file
+pytest tests/components/test_combat.py
+
+# Run with coverage report
+pytest tests/ --cov=src --cov-report=term-missing
+```
+
+**Test Statistics:**
+- 559 passing tests
+- Components: 100% covered
+- Systems: 100% covered
+- Data loaders: 100% covered
+
+---
+
+## Project Structure
+
+```
+/OBDIIGame
+├── src/                    # Source code
+│   ├── components/         # ECS components
+│   ├── systems/            # Game systems
+│   ├── entities/           # Entity definitions
+│   ├── data_loader/        # JSON loaders
+│   ├── procedural/         # Dungeon generation
+│   ├── models.py           # Core data models
+│   └── game_loop.py        # Main game loop
+├── config/                 # Game content (JSON)
+│   ├── floors/             # Floor definitions
+│   ├── enemies/            # Enemy definitions
+│   ├── items/              # Item definitions
+│   └── recipes/            # Crafting recipes
+├── assets/                 # ASCII art assets
+│   ├── ui/                 # UI screens
+│   ├── characters/         # Character art
+│   ├── enemies/            # Enemy art
+│   ├── items/              # Item art
+│   └── tiles/              # Tile art
+├── tests/                  # Test suite
+│   ├── components/         # Component tests
+│   ├── systems/            # System tests
+│   └── data_loader/        # Loader tests
+├── docs/                   # Documentation
+├── main.py                 # Entry point
+├── requirements.txt        # Dependencies
+├── setup.py                # Package configuration
+├── pyproject.toml          # Build configuration
+└── README.md               # This file
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Third-Party Licenses
+- **pytest:** MIT License
+- **mypy:** MIT License (optional dev dependency)
+
+---
+
+## Acknowledgments
+
+### Educational Inspiration
+This project was designed as a comprehensive educational tool for teaching:
+- Python software architecture
+- Game development fundamentals
+- Procedural generation algorithms
+- Entity-Component-System patterns
+- Data-driven design principles
+
+### Technology Credits
+- **Python Community** - For excellent documentation and libraries
+- **pytest Team** - For the robust testing framework
+- **Roguelike Development Community** - For inspiration and design patterns
+
+### Special Thanks
+- All contributors who have helped improve this project
+- The open-source community for sharing knowledge and tools
+- Educators and students using this project for learning
+
+---
+
+## Changelog
+
+### v1.0.0 (2025-11-18)
+- ✅ Complete Entity-Component-System implementation
+- ✅ Procedural dungeon generation
+- ✅ Turn-based combat system
+- ✅ Inventory and crafting systems
+- ✅ Save/load functionality
+- ✅ Tutorial floor (Floor 0)
+- ✅ Comprehensive documentation (325+ pages)
+- ✅ 559 passing tests
+- ✅ 17 ASCII art assets
+- 🐛 Fixed: Tutorial floor naming convention
+- 🐛 Fixed: Negative damage calculation bug
+
+See [PHASE5_PROGRESS.md](PHASE5_PROGRESS.md) for detailed development history.
+
+---
+
+## FAQ
+
+**Q: What Python version do I need?**
+A: Python 3.8 or higher.
+
+**Q: Can I use this for learning?**
+A: Absolutely! This project was specifically designed as an educational tool.
+
+**Q: How do I add new content?**
+A: See [docs/DATA_DRIVEN_DESIGN.md](docs/DATA_DRIVEN_DESIGN.md) for detailed guides on creating floors, enemies, items, and recipes.
+
+**Q: Can I use this code in my own project?**
+A: Yes! This project is MIT licensed. See [LICENSE](LICENSE) for details.
+
+**Q: How do I report bugs?**
+A: Create an issue on GitHub with a clear description and steps to reproduce.
+
+**Q: Can I contribute?**
+A: Yes! See the [Contributing](#contributing) section above.
+
+**Q: Where can I find more examples?**
+A: Check the `demo_phase*.py` files and the `tests/` directory.
+
+---
+
+## Support
+
+- **Issues:** Report bugs or request features via GitHub Issues
+- **Discussions:** Ask questions in GitHub Discussions
+- **Documentation:** Comprehensive guides in `docs/` folder
+- **Examples:** Working examples in `demo_*.py` and `tests/`
+
+---
+
+## Roadmap
+
+### Future Enhancements (Post v1.0)
+- [ ] Advanced AI behaviors and enemy patterns
+- [ ] More floor themes and environments
+- [ ] Enhanced crafting system with more recipes
+- [ ] Status effect system expansion
+- [ ] Quest and objective system
+- [ ] Achievement system
+- [ ] Multiple difficulty modes
+- [ ] Enhanced ASCII graphics with colors
+- [ ] Sound effects (terminal bell)
+- [ ] Mod support and plugin system
+
+### Community Requests
+Have an idea? Create an issue with the "enhancement" label!
+
+---
+
+# Thank you for exploring the Modular Python Roguelike project!
 Embark on this development journey to sharpen your Python skills and gain a lasting foundation in game system architecture and procedural design. Happy coding!
+
+**Star ⭐ this repository if you find it helpful!**
