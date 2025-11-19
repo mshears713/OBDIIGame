@@ -13,6 +13,8 @@
 
 ## Quick Start
 
+### CLI Version (Original)
+
 ```bash
 # Clone the repository
 git clone <repository-url>
@@ -21,9 +23,35 @@ cd OBDIIGame
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the game
+# Run the game (CLI/ASCII version)
 python main.py
 ```
+
+### Pygame GUI Version (New!)
+
+```bash
+# Install Pygame (in addition to other dependencies)
+pip install pygame
+
+# Run the game with graphical interface
+python run_pygame.py
+
+# Run with custom options
+python run_pygame.py --width 1920 --height 1080 --tile-size 24
+
+# Run with effects disabled for better performance
+python run_pygame.py --no-animations --no-particles
+```
+
+The Pygame version includes:
+- **Graphical tile-based rendering** with fallback colored sprites
+- **Animated tiles** for CAN pathways, sparks, and voltage traps
+- **HUD panel** displaying HP, stats, and message log
+- **Floating combat text** showing damage numbers
+- **Particle effects** for attacks and traps
+- **Minimap overlay** showing explored areas
+- **Sound effects and ambient audio** (placeholder support)
+- **Smooth camera** following the player
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed getting started guide.
 
@@ -68,15 +96,17 @@ The scope deliberately balances complexity: it includes essential roguelike feat
 
 ## Technology Stack
 
-- **Frontend:** None (CLI-only)
-  - *Rationale:* Focus is on core game mechanics, learning, and simplicity; no GUI eliminates complexity.
-  - *Alternatives:* Could incorporate libraries like `curses` for enhanced ASCII rendering or lightweight graphical libraries but kept minimal here.
-  - *Learning:* Ideal for mastering terminal-based UI and input handling.
+- **Frontend:** CLI + Pygame GUI (Optional)
+  - *CLI Version:* Terminal-based ASCII rendering focusing on core mechanics and simplicity
+  - *Pygame Version:* Graphical tile-based rendering with animations, particles, and effects
+  - *Rationale:* Dual interface allows learning both terminal-based and graphical game development
+  - *Alternatives:* Could use `curses` for enhanced CLI or other GUI libraries (e.g., pyglet, arcade)
+  - *Learning:* Master both terminal UI and event-driven graphical interfaces
 
-- **Backend:** Python CLI
+- **Backend:** Python
   - *Rationale:* Python offers clear syntax, strong community support, and wide range of libraries fitting project needs.
   - *Alternatives:* Could use other languages (e.g., JavaScript or C++), but Python strikes optimal balance of accessibility and power.
-  - *Learning:* Builds proficiency in Python modular design and file I/O.
+  - *Learning:* Builds proficiency in Python modular design, file I/O, and game architecture.
 
 - **Storage:** JSON files
   - *Rationale:* JSON is human-readable, easy to parse, and widely supported for data-driven content.
